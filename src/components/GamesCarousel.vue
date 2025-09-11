@@ -27,21 +27,32 @@ onMounted(async () => {
     console.error('Error fetching schedule', error)
   }
 })
+
+const carouselConfig = {
+  itemsToShow: 1,
+  wrapAround: true,
+  height: 250,
+}
 </script>
 
 <template>
-  <Carousel :items-to-show="5.5" :wrap-around="true" :autoplay="5000">
-    <Slide v-for="game in games" :key="game.id">
-      <GameCard
-        :status="game.status"
-        :away-team-name="game.awayTeamName"
-        :away-team-score="game.awayTeamScore"
-        :home-team-name="game.homeTeamName"
-        :home-team-score="game.homeTeamScore"
-      />
-    </Slide>
-    <template #addons>
-      <Navigation />
-    </template>
-  </Carousel>
+  <div class="w-xl">
+    <Carousel v-bind="carouselConfig">
+      <Slide v-for="game in games" :key="game.id">
+        <GameCard
+          :status="game.status"
+          :date="game.date"
+          :away-team-id="game.awayTeamId"
+          :away-team-name="game.awayTeamName"
+          :away-team-score="game.awayTeamScore"
+          :home-team-id="game.homeTeamId"
+          :home-team-name="game.homeTeamName"
+          :home-team-score="game.homeTeamScore"
+        />
+      </Slide>
+      <template #addons>
+        <Navigation />
+      </template>
+    </Carousel>
+  </div>
 </template>
