@@ -11,10 +11,10 @@ onMounted(async () => {
     teamsResponse.data.teams.forEach((team) => {
       teams.value.push({
         id: team.id,
-        name: team.name,
-        venue: team.venue.name,
-        league: team.league.name,
-        division: team.division.name,
+        // name: team.name,
+        // venue: team.venue.name,
+        // league: team.league.name,
+        // division: team.division.name,
       })
     })
   } catch (error) {
@@ -27,16 +27,14 @@ onMounted(async () => {
   <section class="text-center flex flex-col items-center h-96">
     <div class="grid grid-cols-6 lg:grid-cols-15 md:grid-cols-10 sm:grid-cols-6 mt-24">
       <!-- TODO: Update bg colour based on team -->
-      <div
-        v-for="team in teams"
-        :key="team.id"
-        class="flex w-16 h-16 bg-blue-950 rounded-4xl justify-center items-center m-2"
-      >
-        <img
-          class="w-10 h-10"
-          :src="`https://www.mlbstatic.com/team-logos/team-cap-on-dark/${team.id}.svg`"
-        />
-      </div>
+      <RouterLink :to="`/team/${team.id}`" v-for="team in teams" :key="team.id">
+        <div class="flex w-16 h-16 bg-blue-950 rounded-4xl justify-center items-center m-2">
+          <img
+            class="w-10 h-10"
+            :src="`https://www.mlbstatic.com/team-logos/team-cap-on-dark/${team.id}.svg`"
+          />
+        </div>
+      </RouterLink>
     </div>
   </section>
 </template>

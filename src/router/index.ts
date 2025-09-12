@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import TeamsView from '@/views/TeamsView.vue'
+import TeamView from '@/views/TeamView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import PostSeasonView from '@/views/PostSeasonView.vue'
 
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/teams',
       name: 'teams',
       component: TeamsView,
+    },
+    {
+      path: '/team/:id',
+      name: 'team',
+      component: TeamView,
     },
     // {
     //   path: '/players',
