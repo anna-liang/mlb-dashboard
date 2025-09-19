@@ -16,10 +16,10 @@ defineProps({
 <template>
   <div class="flex flex-col w-md p-6 shadow-md rounded-xl justify-center">
     <div class="flex justify-center mb-2">
-      <!-- TODO: Make status type -->
+      <!-- TODO: Make status type & include FINAL -->
       <div
         :class="status === 'Live' ? 'bg-red-600' : 'bg-green-600'"
-        class="text-white w-auto rounded-lg items-center px-2"
+        class="text-white w-auto rounded-lg items-center px-2 pb-0.5"
       >
         {{ status?.toUpperCase() }}
       </div>
