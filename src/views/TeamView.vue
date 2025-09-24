@@ -42,6 +42,7 @@ onMounted(async () => {
         id: player.person.id,
         name: player.person.fullName,
         jerseyNumber: player.jerseyNumber,
+        positionType: player.position.type,
         position: player.position.abbreviation,
         status: player.status.description,
       })
@@ -75,8 +76,9 @@ onMounted(async () => {
     console.error('Error fetching teams', error)
   }
 
-  console.log(team.roster[0])
+  // console.log(team.roster[0])
   findCurrentGame()
+  console.log(team.roster[0])
   // console.log(team)
   // console.log(dayjs(team.games[185].date).format('YYYY-MM-DD'))
   // console.log(dayjs().format('YYYY-MM-DD'))
@@ -88,32 +90,34 @@ onMounted(async () => {
  * if there is no game today.
  */
 const findCurrentGame = () => {
-  const gameIndex = team.games.findIndex((game) => dayjs(game.date).isSameOrAfter(dayjs()))
+  const gameIndex = team.games.findIndex((game) => dayjs(game.date).isSameOrAfter(dayjs(), 'day'))
   if (gameIndex !== -1) currentGameIndex.value = gameIndex
 }
 </script>
 
 <template>
-  <section class="text-center flex flex-col items-center h-96">
+  <section class="text-center flex flex-col items-center h-screen px-8">
     <div class="grid justify-items-center">
       <p>{{ team.name.toUpperCase() }}</p>
       <p>{{ team.division }}</p>
-      <GameCard
-        :status="team.games[currentGameIndex].status"
-        :date="team.games[currentGameIndex].date"
-        :away-team-id="team.games[currentGameIndex].awayTeamId"
-        :away-team-name="team.games[currentGameIndex].awayTeamName"
-        :away-team-score="team.games[currentGameIndex].awayTeamScore"
-        :home-team-id="team.games[currentGameIndex].homeTeamId"
-        :home-team-name="team.games[currentGameIndex].homeTeamName"
-        :home-team-score="team.games[currentGameIndex].homeTeamScore"
-      />
-      <div class="grid grid-cols-2 gap-8 justify-items-center">
+      <div class="mb-8">
+        <GameCard
+          :status="team.games[currentGameIndex].status"
+          :date="team.games[currentGameIndex].date"
+          :away-team-id="team.games[currentGameIndex].awayTeamId"
+          :away-team-name="team.games[currentGameIndex].awayTeamName"
+          :away-team-score="team.games[currentGameIndex].awayTeamScore"
+          :home-team-id="team.games[currentGameIndex].homeTeamId"
+          :home-team-name="team.games[currentGameIndex].homeTeamName"
+          :home-team-score="team.games[currentGameIndex].homeTeamScore"
+        />
+      </div>
+      <div class="grid grid-cols-2 gap-8 justify-items-center mb-10">
         <div>
-          <p>Schedule</p>
+          <p class="mb-2 text-lg">Schedule</p>
         </div>
-        <div>
-          <p>Players</p>
+        <div class="flex flex-col items-start">
+          <p class="mb-2 text-lg">Players</p>
           <PlayersPreviewCard :roster="team.roster" />
         </div>
       </div>

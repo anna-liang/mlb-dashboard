@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="shadow-md grid grid-cols-6 gap-4 w-auto border-2 border-amber-500">
+  <div class="shadow-md flex flex-wrap w-fit max-h-400 gap-3 rounded-lg p-4">
     <div v-for="player in roster" class="">
       <PlayerPreviewHeadshot :id="player.id" :name="player.name" />
     </div>
