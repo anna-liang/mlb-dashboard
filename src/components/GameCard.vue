@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import { defineProps } from 'vue'
-defineProps({
+const props = defineProps({
   status: String,
   date: String,
   awayTeamId: Number,
@@ -11,16 +11,23 @@ defineProps({
   homeTeamName: String,
   homeTeamScore: Number,
 })
+
+const getGameStatusStyle = () => {
+  if (props.status === 'Live') {
+    return ['bg-red-600', 'text-white']
+  } else if (props.status === 'Preview') {
+    return ['bg-green-600', 'text-white']
+  } else {
+    // status === 'Final'
+    return ['bg-gray-200', 'text-gray-800']
+  }
+}
 </script>
 
 <template>
   <div class="flex flex-col w-md p-6 shadow-md rounded-xl justify-center">
     <div class="flex justify-center mb-2">
-      <!-- TODO: Make status type & include FINAL -->
-      <div
-        :class="status === 'Live' ? 'bg-red-600' : 'bg-green-600'"
-        class="text-white w-auto rounded-lg items-center px-2 pb-0.5"
-      >
+      <div :class="getGameStatusStyle()" class="w-auto rounded-md items-center px-2 pb-0.5">
         {{ status?.toUpperCase() }}
       </div>
     </div>
