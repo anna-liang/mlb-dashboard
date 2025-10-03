@@ -4,6 +4,7 @@ import TeamsView from '@/views/TeamsView.vue'
 import TeamView from '@/views/TeamView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import PostSeasonView from '@/views/PostSeasonView.vue'
+import PlayerView from '@/views/PlayerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,11 +29,11 @@ const router = createRouter({
       name: 'team',
       component: TeamView,
     },
-    // {
-    //   path: '/players',
-    //   name: 'players',
-    //   component: PlayersView,
-    // },
+    {
+      path: '/players/:id',
+      name: 'player',
+      component: PlayerView,
+    },
     {
       path: '/postseason',
       name: 'postseason',
